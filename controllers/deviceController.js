@@ -10,23 +10,7 @@ class deviceController {
             const {label, price, brandId, typeId, info} = req.body
             const {img} = req.file
             let fileName = uuid.v4() + ".jpg"
-            // const info = []
-
-            // const device = new deviceModel({
-            //     label, price, brandId, typeId, img: req.file.filename
-            // })
-            
             const device = await deviceModel.create({label, price, brandId, typeId, img: req.file.filename, info})
-            // if (info) {
-            //     info = JSON.parse(info)
-            //     info.forEach(i =>
-            //         DeviceInfo.create({
-            //             title: i.title,
-            //             description: i.description,
-            //             deviceId: device.id
-            //         })
-            //     )
-            // }
             return res.json(device)
         } catch (e) {
             next(ApiError.badRequest(e.message))
